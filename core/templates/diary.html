@@ -1,0 +1,11 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<h1>Diary</h1>
+
+<ul>
+    {% for event in events %}
+    <li><b>{{event.title}} - {{event.get_event_date}}</b></li>
+    {% endfor %}
+</ul>
+{% endblock %}
