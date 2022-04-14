@@ -1,4 +1,5 @@
 from turtle import title
+from django.http import JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from core.models import Event
 from django.contrib.auth.decorators import login_required
@@ -44,6 +45,12 @@ def list_events(req):
     event = Event.objects.filter(user=user)
     res = {'events': event}
     return render(req, 'diary.html', res)
+
+@login_required(login_url='/login/')
+def json_event_list(req):
+    user = req.user #Gets de authenticated user
+    event = Event.objects.filter(user=user).values('id', 'title')
+    return JsonResponse(list(event), safe=False)
 
 @login_required(login_url='/login/')
 def event(req):
