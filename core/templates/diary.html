@@ -3,9 +3,18 @@
 {% block content %}
 <h1>Diary</h1>
 
+<a href="event/">
+    <button type="button">New Event</button>
+</a>
 <ul>
     {% for event in events %}
-    <li><b>{{event.title}} - {{event.get_event_date}}</b></li>
+    <li>
+        <b>
+            {{event.title}} - {{event.get_event_date}}
+            (<a href="event/?id={{event.id}}">Edit</a> /
+            <a href="event/delete/{{event.id}}">Delete</a>)
+        </b>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
